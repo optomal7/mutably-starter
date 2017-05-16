@@ -3,18 +3,18 @@ console.log("Sanity Check: JS is working!");
 $(document).ready(function(){
 
   // get all the data on load of the page
-  getAllBooks();
+  getAllpokemon();
 
-  $('#new-book-form').on('submit', function(event) {
+  $('#new-poke-form').on('submit', function(event) {
     event.preventDefault()
-    var newBookData = $(this).serialize();
-    console.log(newBookData);
+    var newpokeData = $(this).serialize();
+    console.log(newpokeData);
     $(this).trigger("reset");
     $.ajax({
       method: 'POST',
-      url: 'http://mutably.herokuapp.com/books/',
-      data: newBookData,
-      success: handleBookAddResponse
+      url: 'http://mutably.herokuapp.com/pokemon/',
+      data: newpokeData,
+      success: handlepokeAddResponse
     })
   })
 
@@ -23,16 +23,16 @@ $(document).ready(function(){
     var id = $(this).data('id')
     $.ajax({
       method: 'DELETE',
-      url: 'http://mutably.herokuapp.com/books/'+id,
-      success: handleBookDeleteResponse
+      url: 'http://mutably.herokuapp.com/pokemon/'+id,
+      success: handlepokeDeleteResponse
     })
   })
 
   $(document).on('click', '.edit-btn', function() {
     var id = $(this).data('id')
 
-    // hide the static title, show the input field
-    $('.title-'+id).hide()
+    // hide the static name, show the input field
+    $('.name-'+id).hide()
     $('.input-'+id).show()
 
     // hide the edit button, show the save button
@@ -45,55 +45,55 @@ $(document).ready(function(){
     var id = $(this).data('id')
 
     // grab the user's inputted data
-    var updatedTitle = $('.input-'+id+' input').val()
+    var updatedname = $('.input-'+id+' input').val()
     $.ajax({
       method: 'PUT',
-      url: 'http://mutably.herokuapp.com/books/'+id,
-      data: {title: updatedTitle},
-      success: handleBookUpdateResponse
+      url: 'http://mutably.herokuapp.com/pokemon/'+id,
+      data: {name: updatedname},
+      success: handlepokeUpdateResponse
     })
   })
 });
 
-function getAllBooks() {
+function getAllpokemon() {
   $('.list-group').html('')
   $.ajax({
     method: 'GET',
-    url: 'http://mutably.herokuapp.com/books'
+    url: 'http://mutably.herokuapp.com/pokemon'
   }).done(function(data) {
-    for (var i=0; i<data.books.length; i++) {
-      $('.list-group').append('<li class="list-group-item item-'+data.books[i]._id+'">'
-      +'<button class="btn btn-primary edit-btn edit-'+data.books[i]._id+'" data-id="'+data.books[i]._id+'">Edit</button>'
-      +'<button class="btn btn-success save-btn save-'+data.books[i]._id+'" data-id="'+data.books[i]._id+'">Save</button>'
-      +'<span class="title-'+data.books[i]._id+'">&nbsp;'+data.books[i].title+'</span>'
-      +'<span class="form-inline edit-form input-'+data.books[i]._id+'">&nbsp;<input class="form-control" value="'+data.books[i].title+'"/></span>'
-      +'<button class="btn btn-danger delete-btn pull-right" data-id="'+data.books[i]._id+'">Delete</button>'
+    for (var i=0; i<data.pokemon.length; i++) {
+      $('.list-group').append('<li class="list-group-item item-'+data.pokemon[i]._id+'">'
+      +'<button class="btn btn-primary edit-btn edit-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Edit</button>'
+      +'<button class="btn btn-success save-btn save-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Save</button>'
+      +'<span class="name-'+data.pokemon[i]._id+'">&nbsp;'+data.pokemon[i].name+'</span>'
+      +'<span class="form-inline edit-form input-'+data.pokemon[i]._id+'">&nbsp;<input class="form-control" value="'+data.pokemon[i].name+'"/></span>'
+      +'<button class="btn btn-danger delete-btn pull-right" data-id="'+data.pokemon[i]._id+'">Delete</button>'
       +'</li>')
     }
   })
 }
 
-function handleBookAddResponse(data) {
+function handlepokeAddResponse(data) {
   console.log(data);
-  // reretrieve and rerender all the books
-  getAllBooks();
+  // reretrieve and rerender all the pokemon
+  getAllpokemon();
 }
 
-function handleBookDeleteResponse(data) {
-  console.log('handleBookDeleteResponse got ', data);
-  var bookId = data._id;
-  var $row = $('.item-' + bookId);
-  // remove that book row
+function handlepokeDeleteResponse(data) {
+  console.log('handlepokeDeleteResponse got ', data);
+  var pokeId = data._id;
+  var $row = $('.item-' + pokeId);
+  // remove that poke row
   $row.remove();
 }
 
-function handleBookUpdateResponse(data) {
+function handlepokeUpdateResponse(data) {
   var id = data._id;
 
-  // replace the old title with the new title
-  $('.title-'+id).html('&nbsp;'+data.title)
+  // replace the old name with the new name
+  $('.name-'+id).html('&nbsp;'+data.name)
 
-  $('.title-'+id).show()
+  $('.name-'+id).show()
   $('.input-'+id).hide()
   $('.edit-'+id).show()
   $('.save-'+id).hide()
