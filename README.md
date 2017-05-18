@@ -7,6 +7,10 @@ For goal #383
 1. Open localhost:3000 using your web browser of choice.
 1. Unless your choice is IE, that's an invalid choice.
 
+Or just checkout our live, wild, and free deployment on Heroku!
+
+https://murmuring-hollows-80038.herokuapp.com/
+
 ## How to use
 Input your pokemon name and number, as well as what it evolved from.
 
