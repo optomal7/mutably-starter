@@ -21,7 +21,7 @@ $(document).ready(function(){
     $(this).trigger("reset");
     $.ajax({
       method: 'POST',
-      url: 'http://mutably.herokuapp.com/pokemon/',
+      url: 'https://mutably.herokuapp.com/pokemon/',
       data: newPokeData,
       success: newPokeDataResponse
     })
@@ -32,7 +32,7 @@ $(document).ready(function(){
     var id = $(this).data('id')
     $.ajax({
       method: 'DELETE',
-      url: 'http://mutably.herokuapp.com/pokemon/'+id,
+      url: 'https://mutably.herokuapp.com/pokemon/'+id,
       success: releasePokeDataResponse
     })
 
@@ -56,7 +56,7 @@ $(document).ready(function(){
     //grab all the existing data on current pokemon
     $.ajax({
       method: 'GET',
-      url: 'http://mutably.herokuapp.com/pokemon/'+id,
+      url: 'https://mutably.herokuapp.com/pokemon/'+id,
     }).done(function(data){
       var dexNum = data.pokedex
       var evolved = data.evolves_from
@@ -64,7 +64,7 @@ $(document).ready(function(){
       // send old static data, + new name along
       $.ajax({
         method: 'PUT',
-        url: 'http://mutably.herokuapp.com/pokemon/'+id,
+        url: 'https://mutably.herokuapp.com/pokemon/'+id,
         data: {name: caughtPokemon, pokedex: dexNum, evolves_from: evolved, image: visual},
         success: catchPokeDataResponse
       })
@@ -76,7 +76,7 @@ function catchEmAll () {
   $('.list-group').html('')
   $.ajax({
     method: 'GET',
-    url: 'http://mutably.herokuapp.com/pokemon'
+    url: 'https://mutably.herokuapp.com/pokemon'
   }).done(function(data) {
     for (var i = 0; i < data.pokemon.length; i++) {
       $('.list-group').append('<li class="list-group-item item-'+data.pokemon[i]._id+'">'
