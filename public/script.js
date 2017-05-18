@@ -81,9 +81,9 @@ function catchEmAll () {
     for (var i = 0; i < data.pokemon.length; i++) {
       $('.list-group').append('<li class="list-group-item item-'+data.pokemon[i]._id+'">'
 
-      +'<button class="btn btn-primary edit-btn edit-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Edit</button>'
-      +'<button class="btn btn-success save-btn save-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Save</button>'
-      +'<span class="name-'+data.pokemon[i]._id+'">&nbsp;'+data.pokemon[i].name+'&nbsp;'+data.pokemon[i].pokedex+'&nbsp;'+ "Evolves From " +data.pokemon[i].evolves_from+ '</span>'
+      +'<button class="btn btn-primary edit-btn edit-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Nickname<i class="material-icons right">mode_edit</i></button>'
+      +'<button class="btn btn-success save-btn save-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Save<i class="material-icons right">input</i></button>'
+      +'<span class="name-'+data.pokemon[i]._id+'">&nbsp;'+data.pokemon[i].name+'&nbsp;'+data.pokemon[i].pokedex+'&nbsp;'+ "Evolves from: " +data.pokemon[i].evolves_from+ '</span>'
 
 
       +'<span class="form-inline edit-form input-'+data.pokemon[i]._id+'">&nbsp;<input class="form-control" value="'+data.pokemon[i].name+'"/></span>'
@@ -114,7 +114,7 @@ function catchPokeDataResponse(data) {
   var id = data._id;
 
   // nickname the pokemon
-  $('.name-'+id).html('&nbsp;'+data.name+'&nbsp'+data.pokedex+'&nbsp;'+ "Evolves From "+data.evolves_from)
+  $('.name-'+id).html('&nbsp;'+data.name+'&nbsp'+data.pokedex+'&nbsp;'+ "Evolves from: "+data.evolves_from)
   $('.btn-danger').show()
   $('.name-'+id).show()
   $('.input-'+id).hide()
