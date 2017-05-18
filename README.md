@@ -9,7 +9,7 @@ For goal #383
 
 Or just check out our live, wild, and free deployment on Heroku!
 
-https://murmuring-hollows-80038.herokuapp.com/
+https://hidden-wave-42934.herokuapp.com/
 
 ## How to use
 Input your pokemon name and number, as well as what it evolved from.
